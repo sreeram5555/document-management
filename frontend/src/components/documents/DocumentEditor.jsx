@@ -135,7 +135,7 @@ const DocumentEditor = () => {
           <input
             type="password"
             placeholder="Edit password"
-            value={enteredPassword}
+             value={enteredPassword}
             onChange={(e) => setEnteredPassword(e.target.value)}
             className="w-full p-2 border rounded mb-3"
           />

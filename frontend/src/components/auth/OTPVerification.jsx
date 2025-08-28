@@ -12,7 +12,7 @@ const OTPVerification = () => {
     const email = location.state?.email;
 
     if (!email) {
-        // Redirect if email is not in state (e.g., direct navigation to this page)
+        
         navigate('/signup');
         return null;
     }

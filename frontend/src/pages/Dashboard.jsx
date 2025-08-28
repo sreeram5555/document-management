@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import API from '../api';
@@ -42,7 +41,6 @@ const Dashboard = ({userInfo, setUserInfo}) => {
     fetchDocs();
   }, [location.search]);
 
- 
   const handleDelete = (docId) => {
     setDocuments(documents.filter(doc => doc._id !== docId));
   };
@@ -73,7 +71,7 @@ const Dashboard = ({userInfo, setUserInfo}) => {
 
   return (
     <div>
-      {/* Header */}
+      {/* thalakay */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
         <h1 className="text-4xl font-bold text-gray-800">
           {userId ? "User's Documents" : "Your Documents"}
@@ -88,7 +86,7 @@ const Dashboard = ({userInfo, setUserInfo}) => {
             Create New
           </Link>
         )}
-      </div>
+      </div>         
 
   
 

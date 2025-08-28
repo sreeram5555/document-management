@@ -1,3 +1,4 @@
+
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 
@@ -22,18 +23,14 @@ DocumentSchema.pre('save', async function (next) {
 });
 
 DocumentSchema.methods.matchEditPassword = async function (enteredPassword, userId) {
-    // Owner bypasses password
-    if (this.owner.equals(userId)) return true;
-    if (!enteredPassword || !this.editPassword) return false;
-    return await bcrypt.compare(enteredPassword, this.editPassword);
+  if (this.owner.equals(userId)) return true;
+  return await bcrypt.compare(enteredPassword, this.editPassword);
 };
 
 DocumentSchema.methods.matchViewPassword = async function (enteredPassword, userId) {
-    if (this.owner.equals(userId)) return true;
-    if (!enteredPassword || !this.viewPassword) return false;
-    return await bcrypt.compare(enteredPassword, this.viewPassword);
+  if (this.owner.equals(userId)) return true;
+  return await bcrypt.compare(enteredPassword, this.viewPassword );
 };
-
 
 const Document = mongoose.model('Document', DocumentSchema);
 export default Document;
