@@ -8,6 +8,7 @@ import documentRoutes from './routes/documentRoutes.js';
 // import  {protect}  from '../middleware/authMiddleware.js';
 import { searchUsers,getNotifications } from "./controllers/userController.js";
 import { protect } from "./middleware/authMiddleware.js";
+import userRoutes from "./routes/userRoutes.js";
 import cors from "cors";
 
 dotenv.config();
@@ -24,6 +25,8 @@ app.use("/api/auth", authRoutes);
 app.use('/api/documents', documentRoutes);
 app.get('/api/users', protect, searchUsers);
 app.get('/notifications', protect, getNotifications);
+app.use("/api/users", userRoutes);
+
 // app.get("/:id", protect, getDocumentById);
 
 // connect DB

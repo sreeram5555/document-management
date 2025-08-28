@@ -14,7 +14,7 @@ const NotificationPanel = ({ notifications, setNotifications, onClose }) => {
 
     const handleDelete = async (id) => {
         try {
-            await API.delete(`/users/notifications/${id}`);
+            await API.delete(`users/notifications/${id}`);
             setNotifications(notifications.filter(n => n._id !== id));
         } catch (error) {
             console.error('Failed to delete notification', error);

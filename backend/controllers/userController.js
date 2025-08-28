@@ -1,6 +1,6 @@
 
 import User from '../models/User.js';
-
+import Notification from '../models/Notification.js';
 
 export const searchUsers = async (req, res) => {
     const keyword = req.query.search
@@ -16,7 +16,8 @@ export const searchUsers = async (req, res) => {
 
 export const getNotifications = async (req, res) => {
     try {
-        const notifications = await Notification.find({ user: req.user._id }).sort({ createdAt: -1 });
+        const notifications = await Notification.find({ user: req.user._id })
+            .sort({ createdAt: -1 });
         res.json(notifications);
     } catch (error) {
         res.status(500).json({ message: error.message });

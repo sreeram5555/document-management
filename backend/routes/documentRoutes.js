@@ -5,11 +5,12 @@ import {
   getUserDocuments,
   viewDocument,
   getDocument,
-  
+  getAllPasswords,
   updateDocument,
   deleteDocument,
   getDocumentForEdit,
-  verifyPassword
+  verifyPassword,
+  getOwnerPasswords
 } from '../controllers/documentController.js';
 
 const router = express.Router();
@@ -22,5 +23,8 @@ router.route('/:id/view').post(protect, viewDocument);
 router.route('/:id/edit').post(protect, getDocumentForEdit).put(protect, updateDocument);
 router.post("/:id/verify-password", protect, verifyPassword);
 router.post("/", protect, createDocument);
+router.get("/passwords", protect, getOwnerPasswords);
+router.get("/passwords/all", protect, getAllPasswords);
+
 
 export default router;

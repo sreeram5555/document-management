@@ -78,13 +78,22 @@ const Dashboard = ({userInfo, setUserInfo}) => {
         </h1>
 
         {!userId && (
-          <Link
-            to="/document/new"
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300"
-          >
-            <PlusIcon className="w-5 h-5" />
-            Create New
-          </Link>
+          <>
+            <Link
+              to="/passwords"
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300"
+            >
+                Passwords
+            </Link>
+
+            <Link
+              to="/document/new"
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300"
+            >
+              <PlusIcon className="w-5 h-5" />
+              Create New
+            </Link>
+          </>
         )}
       </div>         
 
