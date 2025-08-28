@@ -115,7 +115,8 @@ const Dashboard = ({userInfo, setUserInfo}) => {
                       navigate(`/dashboard?user=${user._id}`); // navigate to user docs
                     }}
                   >
-                    {user.username} ({user.email})
+                    {user.username} 
+                    {/* ({user.email}) */}
                   </li>
                 ))}
               </ul>

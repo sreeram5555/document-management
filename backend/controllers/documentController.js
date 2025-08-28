@@ -1,26 +1,30 @@
 import Document from '../models/Document.js';
-
-
+import bcrypt from "bcryptjs";
 
 
 export const createDocument = async (req, res) => {
-   console.log("req.user:", req.user);
-  const { title, content, editPassword, viewPassword } = req.body;
-  try {
-    const document = new Document({
-      title,
-      content,
-      editPassword,
-      viewPassword,
-      owner: req.user._id,
-    });
+  const { title, content, viewPassword, editPassword } = req.body;
 
-    const createdDocument = await document.save();
-    res.status(201).json(createdDocument);
+  if (!viewPassword || !editPassword) {
+    return res.status(400).json({ message: "Both passwords are required" });
+  }
+
+  const doc = new Document({
+    title,
+    content,
+    viewPassword,   
+    editPassword,  
+    owner: req.user._id,  
+  });
+
+  try {
+    await doc.save();
+    res.status(201).json(doc);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(400).json({ message: error.message });
   }
 };
+
 
 export const getUserDocuments = async (req, res) => {
   try {
@@ -33,31 +37,6 @@ export const getUserDocuments = async (req, res) => {
   }
 };
 
-// export const viewDocument = async (req, res) => {
-//     const { password } = req.body;
-//     const userId = req.user._id;
-
-//     try {
-//         const document = await Document.findById(req.params.id);
-//         if (!document) return res.status(404).json({ message: 'Document not found' });
-
-//         const isMatch = await document.matchViewPassword(password, userId);
-//         if (!isMatch) return res.status(401).json({ message: 'Incorrect viewership password' });
-
-//         // Notify owner only if another user viewed
-//         if (!document.owner.equals(userId)) {
-//             await Notification.create({
-//                 user: document.owner,
-//                 message: `${req.user.username} viewed your document: "${document.title}"`,
-//                 documentId: document._id,
-//             });
-//         }
-
-//         res.json({ title: document.title, content: document.content });
-//     } catch (error) {
-//         res.status(500).json({ message: error.message });
-//     }
-// };
 
 export const viewDocument = async (req, res) => {
     const { password } = req.body;
@@ -79,23 +58,6 @@ export const viewDocument = async (req, res) => {
     }
 };
 
-// export const getDocumentForEdit = async (req, res) => {
-//     const { password } = req.body;
-//     const userId = req.user._id;
-
-//     try {
-//         const document = await Document.findById(req.params.id);
-//         if (!document) return res.status(404).json({ message: 'Document not found' });
-
-//         const isMatch = await document.matchEditPassword(password, userId);
-
-//         if (!isMatch) return res.status(401).json({ message: 'Incorrect editor password' });
-
-//         res.json(document);
-//     } catch (error) {
-//         res.status(500).json({ message: error.message });
-//     }
-// };
 
 export const getDocument = async (req, res) => {
   try {
@@ -150,36 +112,6 @@ export const verifyPassword = async (req, res) => {
     }
 };
 
-// export const updateDocument = async (req, res) => {
-//     const { title, content, password } = req.body;
-//     const userId = req.user._id;
-
-//     try {
-//         const document = await Document.findById(req.params.id);
-//         if (!document) return res.status(404).json({ message: 'Document not found' });
-
-//         const isMatch = await document.matchEditPassword(password, userId);
-//         if (!isMatch) return res.status(401).json({ message: 'Incorrect editor password' });
-
-//         document.title = title || document.title;
-//         document.content = content || document.content;
-
-//         const updatedDocument = await document.save();
-
-//         // Optional: Notify owner if edited by another user
-//         if (!document.owner.equals(userId)) {
-//             await Notification.create({
-//                 user: document.owner,
-//                 message: `${req.user.username} edited your document: "${document.title}"`,
-//                 documentId: document._id,
-//             });
-//         }
-
-//         res.json(updatedDocument);
-//     } catch (error) {
-//         res.status(500).json({ message: error.message });
-//     }
-// };
 
 export const updateDocument = async (req, res) => {
     // Note: We now get editPassword from the body, not just 'password'

@@ -13,8 +13,8 @@ const setAuthCookie = (res, token) => {
 
   res.cookie("token", token, {
   httpOnly: true,
-  secure: true,       // must be true in production (HTTPS)
-  sameSite: "none"    // required for cross-site
+  secure: true,       
+  sameSite: "none"   
 });
 };
 

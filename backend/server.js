@@ -19,6 +19,7 @@ app.use(express.json());
 app.use(cors());
 
 // routes
+
 app.use("/api/auth", authRoutes);
 app.use('/api/documents', documentRoutes);
 app.get('/api/users', protect, searchUsers);

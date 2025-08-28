@@ -21,5 +21,6 @@ router.route('/:id')
 router.route('/:id/view').post(protect, viewDocument);
 router.route('/:id/edit').post(protect, getDocumentForEdit).put(protect, updateDocument);
 router.post("/:id/verify-password", protect, verifyPassword);
+router.post("/", protect, createDocument);
 
 export default router;
