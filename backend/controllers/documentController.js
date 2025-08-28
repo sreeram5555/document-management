@@ -1,5 +1,6 @@
 import Document from '../models/Document.js';
 import bcrypt from "bcryptjs";   
+import Notification from '../models/Notification.js'; // add this at top
 
 
 
@@ -299,6 +300,11 @@ export const updateDocument = async (req, res) => {
     document.content = content || document.content;
 
     const updatedDocument = await document.save();
+    await Notification.create({
+      user: document.owner,
+      message: `${req.user.username} edited your document "${document.title}"`,
+    });
+    
     return res.json(updatedDocument);
 
   } catch (error) {
