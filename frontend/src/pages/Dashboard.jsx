@@ -5,6 +5,7 @@ import API from '../api';
 import DocumentCard from '../components/documents/DocumentCard';
 import Spinner from '../components/common/Spinner';
 import { PlusIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid';
+import axios from 'axios';
 
 const Dashboard = ({userInfo, setUserInfo}) => {
   const [documents, setDocuments] = useState([]);
@@ -44,6 +45,23 @@ const Dashboard = ({userInfo, setUserInfo}) => {
   const handleDelete = (docId) => {
     setDocuments(documents.filter(doc => doc._id !== docId));
   };
+
+// const handleDelete = async (docId) => {
+//   try {
+//     const token = JSON.parse(localStorage.getItem('userInfo'))?.token;
+//     await axios.delete(`/api/documents/${docId}`, {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       }
+//     });
+
+//     // Remove from local state after successful delete
+//     setDocuments(prevDocs => prevDocs.filter(doc => doc._id !== docId));
+//   } catch (error) {
+//     console.error("Failed to delete document:", error.response?.data?.message || error.message);
+//     alert("Error deleting document");
+//   }
+// };
 
   const handleSearch = async (e) => {
     setSearchQuery(e.target.value);
