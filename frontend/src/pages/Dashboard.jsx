@@ -233,6 +233,26 @@ const Dashboard = ({ userInfo, setUserInfo }) => {
   //   }
   // };
 
+// const handleDelete = async (docId) => {
+//   try {
+//     const token = JSON.parse(localStorage.getItem('userInfo'))?.token;
+//     const res = await API.delete(`/documents/${docId}`, {
+//       headers: { Authorization: `Bearer ${token}` },
+//     });
+
+//     if (res.data.success) {
+//       // Remove from local state
+//       setDocuments(prevDocs => prevDocs.filter(doc => doc._id !== docId));
+//       console.log("✅ Deleted:", res.data.message);
+//     } else {
+//       alert("⚠️ Failed to delete: " + res.data.message);
+//     }
+//   } catch (error) {
+//     console.error("❌ Failed to delete document:", error.response?.data?.message || error.message);
+//     alert("Error deleting document");
+//   }
+// };
+
 const handleDelete = async (docId) => {
   try {
     const token = JSON.parse(localStorage.getItem('userInfo'))?.token;
@@ -241,17 +261,21 @@ const handleDelete = async (docId) => {
     });
 
     if (res.data.success) {
-      // Remove from local state
       setDocuments(prevDocs => prevDocs.filter(doc => doc._id !== docId));
-      console.log("✅ Deleted:", res.data.message);
     } else {
-      alert("⚠️ Failed to delete: " + res.data.message);
+      alert(res.data.message);
     }
   } catch (error) {
-    console.error("❌ Failed to delete document:", error.response?.data?.message || error.message);
-    alert("Error deleting document");
+    const msg = error.response?.data?.message || error.message;
+    if (msg.includes("not found")) {
+      // Just ignore if already deleted
+      setDocuments(prevDocs => prevDocs.filter(doc => doc._id !== docId));
+    } else {
+      alert("Error deleting document: " + msg);
+    }
   }
 };
+
 
 
   const handleSearch = async (e) => {
