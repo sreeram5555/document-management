@@ -4,4 +4,8 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
   ],
+  build: {
+    outDir: 'build',   // 👈 now Vite makes "build/" instead of "dist/"
+  },
+
 })
