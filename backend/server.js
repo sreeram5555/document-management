@@ -20,8 +20,8 @@ app.use(express.json());
 app.use(cors());
 
 const allowedOrigins = [
-  "http://localhost:5173",                   // local Vite frontend
-  "https://document-management-b6lp.onrender.com"  // deployed frontend
+  "http://localhost:5173",                   
+  "https://document-management-b6lp.onrender.com  
 ];
 
 app.use(cors({
