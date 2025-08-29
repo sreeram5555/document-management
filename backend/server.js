@@ -21,7 +21,7 @@ app.use(cors());
 
 const allowedOrigins = [
   "http://localhost:5173",                   
-  "http://document-management-b6lp.onrender.com  
+  "https://document-management-b6lp.onrender.com" // 
 ];
 
 app.use(cors({
