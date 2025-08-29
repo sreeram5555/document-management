@@ -37,11 +37,11 @@ app.use(cors({
 
 // routes
 
-app.use("/auth", authRoutes);
-app.use('/documents', documentRoutes);
-app.get('/users', protect, searchUsers);
-app.get('/notifications', protect, getNotifications);
-app.use("/users", userRoutes);
+app.use("/api/auth", authRoutes);
+app.use('/api/documents', documentRoutes);
+app.get('/api/users', protect, searchUsers);
+app.get('/api/notifications', protect, getNotifications);
+app.use("/api/users", userRoutes);
 
 
 
