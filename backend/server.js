@@ -37,11 +37,16 @@ app.use(cors({
 
 // routes
 
+app.get("/", (req, res) => {
+  res.send("Backend is running!");
+});
+
 app.use("/api/auth", authRoutes);
 app.use('/api/documents', documentRoutes);
 app.get('/api/users', protect, searchUsers);
 app.get('/api/notifications', protect, getNotifications);
 app.use("/api/users", userRoutes);
+
 
 
 
