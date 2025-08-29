@@ -218,20 +218,41 @@ const Dashboard = ({ userInfo, setUserInfo }) => {
     fetchDocs();
   }, [location.search]);
 
-  const handleDelete = async (docId) => {
-    try {
-      const token = JSON.parse(localStorage.getItem('userInfo'))?.token;
-      await API.delete(`/documents/${docId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+  // const handleDelete = async (docId) => {
+  //   try {
+  //     const token = JSON.parse(localStorage.getItem('userInfo'))?.token;
+  //     await API.delete(`/documents/${docId}`, {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     });
 
-      // Remove from local state after successful delete
+  //     // Remove from local state after successful delete
+  //     setDocuments(prevDocs => prevDocs.filter(doc => doc._id !== docId));
+  //   } catch (error) {
+  //     console.error("Failed to delete document:", error.response?.data?.message || error.message);
+  //     alert("Error deleting document");
+  //   }
+  // };
+
+const handleDelete = async (docId) => {
+  try {
+    const token = JSON.parse(localStorage.getItem('userInfo'))?.token;
+    const res = await API.delete(`/documents/${docId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    if (res.data.success) {
+      // Remove from local state
       setDocuments(prevDocs => prevDocs.filter(doc => doc._id !== docId));
-    } catch (error) {
-      console.error("Failed to delete document:", error.response?.data?.message || error.message);
-      alert("Error deleting document");
+      console.log("✅ Deleted:", res.data.message);
+    } else {
+      alert("⚠️ Failed to delete: " + res.data.message);
     }
-  };
+  } catch (error) {
+    console.error("❌ Failed to delete document:", error.response?.data?.message || error.message);
+    alert("Error deleting document");
+  }
+};
+
 
   const handleSearch = async (e) => {
     setSearchQuery(e.target.value);

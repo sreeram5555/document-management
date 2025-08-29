@@ -313,18 +313,38 @@ export const updateDocument = async (req, res) => {
 };
 
 
+// export const deleteDocument = async (req, res) => {
+
+//     try {
+//         const document = await Document.findById(req.params.id);
+//         if (!document) {
+//             return res.status(404).json({ message: 'Document not found' });
+//         }
+//         if (!document.owner.equals(req.user._id)) {
+//             return res.status(401).json({ message: 'Not authorized' });
+//         }
+//         await document.deleteOne();
+//         res.json({ message: 'Document removed' });
+//     } catch (error) {
+//         res.status(500).json({ message: error.message });
+//     }
+// };
+
 export const deleteDocument = async (req, res) => {
-    try {
-        const document = await Document.findById(req.params.id);
-        if (!document) {
-            return res.status(404).json({ message: 'Document not found' });
-        }
-        if (!document.owner.equals(req.user._id)) {
-            return res.status(401).json({ message: 'Not authorized' });
-        }
-        await document.deleteOne();
-        res.json({ message: 'Document removed' });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
+  try {
+    const document = await Document.findById(req.params.id);
+    if (!document) {
+      return res.status(404).json({ success: false, message: 'Document not found' });
     }
+
+    if (!document.owner.equals(req.user._id)) {
+      return res.status(401).json({ success: false, message: 'Not authorized' });
+    }
+
+    await document.deleteOne();
+
+    return res.status(200).json({ success: true, message: 'Document removed' });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: 'Error deleting document', error: error.message });
+  }
 };
