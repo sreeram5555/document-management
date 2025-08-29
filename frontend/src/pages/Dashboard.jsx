@@ -25,7 +25,7 @@ const Dashboard = ({userInfo, setUserInfo}) => {
         setLoading(true);
         const queryParams = new URLSearchParams(location.search);
         const userId = queryParams.get('user');
-        const url = userId ? `/api/documents?user=${userId}` : '/api/documents';
+        const url = userId ? `/documents?user=${userId}` : '/documents';
         const token = JSON.parse(localStorage.getItem('userInfo'))?.token;
         const { data } = await API.get(url, {
           headers: { Authorization: `Bearer ${token}` }
