@@ -2,8 +2,12 @@
 
 import axios from 'axios';
 
-const API = axios.create({
+const APII = axios.create({
   baseURL: import.meta.env.VITE_API_URL, // ✅ dynamic URL
+});
+
+const API = axios.create({
+  baseURL: import.meta.env.VITE_BACKEND_URL, // ✅ dynamic URL from .env
 });
 
 // Add JWT to every request
