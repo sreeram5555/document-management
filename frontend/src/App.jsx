@@ -13,7 +13,7 @@ import ResetPassword from './components/auth/ResetPassword';
 import DocumentEditor from './components/documents/DocumentEditor';
 import DocumentViewer from './components/documents/DocumentViewer';
 import ErrorBoundary from "./components/documents/ErrorBoundary";
-import PasswordsPage from "./pages/PasswordPage";
+// import PasswordsPage from "./pages/PasswordPage";
 
 
 function App() {
@@ -37,7 +37,7 @@ function App() {
             <Route path="/verify-otp" element={<OTPVerification />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/resetpassword/:token" element={<ResetPassword />} />
-            <Route path="/passwords" element={<PasswordsPage />} />
+            {/* <Route path="/passwords" element={<PasswordsPage />} /> */}
             <Route path="/document/new" element={<DocumentEditor />} />
             <Route
   path="/document/:id/edit"
