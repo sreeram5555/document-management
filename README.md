@@ -28,5 +28,5 @@ A web application that allows users to **create, share, and securely manage file
 
 1. Clone the repository:  
    ```bash
-   git clone <your-repo-link>
-   cd <project-folder>
+    git clone https://github.com/sreeram5555/document-management.git
+    cd document-management
