@@ -37,11 +37,13 @@ app.use(cors({
 
 // routes
 
-app.use("/api/auth", authRoutes);
-app.use('/api/documents', documentRoutes);
-app.get('/api/users', protect, searchUsers);
+app.use("/auth", authRoutes);
+app.use('/documents', documentRoutes);
+app.get('/users', protect, searchUsers);
 app.get('/notifications', protect, getNotifications);
-app.use("/api/users", userRoutes);
+app.use("/users", userRoutes);
+
+
 
 // app.get("/:id", protect, getDocumentById);
 
