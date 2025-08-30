@@ -14,12 +14,10 @@ const DocumentSchema = new mongoose.Schema({
 DocumentSchema.pre('save', async function (next) {
   if (this.isModified('editPassword')) {
       const salt = await bcrypt.genSalt(10);
-      //  this.editPassword = encrypt(this.editPassword);
       this.editPassword = await bcrypt.hash(this.editPassword, salt);
   }
   if (this.isModified('viewPassword')) {
       const salt = await bcrypt.genSalt(10);
-      //  this.viewPassword = encrypt(this.viewPassword);
       this.viewPassword = await bcrypt.hash(this.viewPassword, salt);
   }
   next();
@@ -37,35 +35,3 @@ DocumentSchema.methods.matchViewPassword = async function (enteredPassword, user
 
 const Document = mongoose.model('Document', DocumentSchema);
 export default Document;
-
-// import mongoose from "mongoose";
-// import { encrypt, decrypt } from "../utils/crypto.js";
-
-// const DocumentSchema = new mongoose.Schema({
-//   owner: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-//   title: { type: String, required: true },
-//   content: { type: String, default: "" },
-//   editPassword: { type: String, required: true }, // encrypted
-//   viewPassword: { type: String, required: true }, // encrypted
-// }, { timestamps: true });
-
-// // Encrypt before saving
-// DocumentSchema.pre("save", function (next) {
-//   if (this.isModified("editPassword")) {
-//     this.editPassword = encrypt(this.editPassword);
-//   }
-//   if (this.isModified("viewPassword")) {
-//     this.viewPassword = encrypt(this.viewPassword);
-//   }
-//   next();
-// });
-
-// // Decrypt when sending to owner
-// DocumentSchema.methods.getDecryptedPasswords = function () {
-//   return {
-//     editPassword: decrypt(this.editPassword),
-//     viewPassword: decrypt(this.viewPassword)
-//   };
-// };
-
-// export default mongoose.model("Document", DocumentSchema);

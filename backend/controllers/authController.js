@@ -105,7 +105,6 @@ export const login = async (req, res) => {
 
 
 
-// ================= RESET PASSWORD =================
 export const resetPassword = async (req, res) => {
   const resetPasswordToken = crypto
     .createHash("sha256")
