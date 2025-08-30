@@ -4,8 +4,6 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import authRoutes from "./routes/authRoutes.js";
 import documentRoutes from './routes/documentRoutes.js';
-// import { searchUsers, getNotifications } from './controllers/userController.js';
-// import  {protect}  from '../middleware/authMiddleware.js';
 import { searchUsers,getNotifications } from "./controllers/userController.js";
 import { protect } from "./middleware/authMiddleware.js";
 import userRoutes from "./routes/userRoutes.js";

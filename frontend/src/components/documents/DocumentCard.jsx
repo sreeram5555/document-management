@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PencilIcon, EyeIcon, TrashIcon } from '@heroicons/react/24/outline';
@@ -7,7 +5,7 @@ import API from '../../api';
 
 const DocumentCard = ({ document, onDelete, currentUserId }) => {
     const navigate = useNavigate();
-    const isOwner = document.owner === currentUserId; // check ownership
+    const isOwner = document.owner === currentUserId; 
 
     const handleEdit = () => {
         navigate(`/document/${document._id}/edit`, { state: { isOwner } });
@@ -28,7 +26,7 @@ const DocumentCard = ({ document, onDelete, currentUserId }) => {
                     headers: { Authorization: `Bearer ${token}` },
                 });
 
-                onDelete(document._id); // update parent state (Dashboard)
+                onDelete(document._id); 
             } catch (error) {
                 console.error("Failed to delete document", error.response?.data || error.message);
                 alert("Could not delete the document.");

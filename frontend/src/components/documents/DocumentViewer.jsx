@@ -17,23 +17,7 @@ const DocumentViewer = () => {
     const [isModalOpen, setIsModalOpen] = useState(!isOwner);
     const [passwordPrompt, setPasswordPrompt] = useState('');
 
-    // useEffect(() => {
-    //     if (isOwner) {
-    //         const fetchDocument = async () => {
-    //             try {
-    //                 // Owner can view without a password
-    //                 const { data } = await API.post(`/documents/${id}/view`, { password: '' });
-    //                 setDocument(data);
-    //             } catch (err) {
-    //                 setError('Failed to load document.');
-    //             } finally {
-    //                 setLoading(false);
-    //             }
-    //         };
-    //         fetchDocument();
-    //     }
-    // }, [id, isOwner]);
-    
+
    useEffect(() => {
     if (isOwner) {
         const fetchDocument = async () => {

@@ -1,16 +1,14 @@
-
-
 import axios from 'axios';
 
-const APII = axios.create({
-  baseURL: import.meta.env.VITE_API_URL, // ✅ dynamic URL
-});
+// const APII = axios.create({
+//   baseURL: import.meta.env.VITE_API_URL, 
+// });
 
 const API = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_URL, // ✅ dynamic URL from .env
+  baseURL: import.meta.env.VITE_BACKEND_URL, 
 });
 
-// Add JWT to every request
+
 API.interceptors.request.use((req) => {
   const userInfo = localStorage.getItem('userInfo');
   if (userInfo) {

@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
 import Header from './components/layout/Header';
 import HomePage from './pages/HomePage';
 import Dashboard from './pages/Dashboard';
@@ -13,8 +12,6 @@ import ResetPassword from './components/auth/ResetPassword';
 import DocumentEditor from './components/documents/DocumentEditor';
 import DocumentViewer from './components/documents/DocumentViewer';
 import ErrorBoundary from "./components/documents/ErrorBoundary";
-// import PasswordsPage from "./pages/PasswordPage";
-
 
 function App() {
   const [userInfo, setUserInfo] = useState(null);
@@ -37,7 +34,6 @@ function App() {
             <Route path="/verify-otp" element={<OTPVerification />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/resetpassword/:token" element={<ResetPassword />} />
-            {/* <Route path="/passwords" element={<PasswordsPage />} /> */}
             <Route path="/document/new" element={<DocumentEditor />} />
             <Route
   path="/document/:id/edit"
@@ -49,7 +45,6 @@ function App() {
 />
             <Route path="/document/:id/view" element={<DocumentViewer />} />
             <Route path="/user/:userId/documents" element={<Dashboard userInfo={userInfo} />} />
- 
           </Routes>
         </main>
       </div>
