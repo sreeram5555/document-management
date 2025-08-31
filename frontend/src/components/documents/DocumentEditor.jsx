@@ -3,16 +3,21 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import API from "../../api";
+import { useLocation } from "react-router-dom";
 
 
 const DocumentEditor = () => {
+    const location = useLocation();
   const { id } = useParams(); // undefined for /document/new
   const navigate = useNavigate();
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   const currentUserId = userInfo?._id;
 
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+    const { fileName, fileContent } = location.state || {};
+
+   const [title, setTitle] = useState(fileName || "");
+   const [content, setContent] = useState(fileContent || "");
+ 
   const [newEditPassword, setNewEditPassword] = useState("");
   const [newViewPassword, setNewViewPassword] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");

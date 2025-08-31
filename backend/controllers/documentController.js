@@ -1,57 +1,9 @@
 import Document from '../models/Document.js';
 import bcrypt from "bcryptjs";   
-import Notification from '../models/Notification.js'; // add this at top
+import Notification from '../models/Notification.js'; 
 
 
 
-// export const createDocument = async (req, res) => {
-//   const { title, content, viewPassword, editPassword } = req.body;
-
-//   if (!viewPassword || !editPassword) {
-//     return res.status(400).json({ message: "Both passwords are required" });
-//   }
-
-//   const doc = new Document({
-//     title,
-//     content,
-//     viewPassword,   
-//     editPassword,  
-//     owner: req.user._id,  
-//   });
-
-//   try {
-//     await doc.save();
-//     res.status(201).json(doc);
-//   } catch (error) {
-//     res.status(400).json({ message: error.message });
-//   }
-// };
-
-// export const createDocument = async (req, res) => {
-//     try {
-//         console.log("REQ BODY:", req.body);
-//         console.log("REQ USER:", req.user);
-
-//         const { title, content, viewPassword, editPassword } = req.body;
-
-//         if (!title || !viewPassword || !editPassword) {
-//             return res.status(400).json({ message: "Missing required fields" });
-//         }
-
-//         const document = await Document.create({
-//             title,
-//             content,
-//             viewPassword,
-//             editPassword,
-//             owner: req.user ? req.user._id : null
-//         });
-
-//         res.status(201).json(document);
-//     } catch (error) {
-//         console.error("Error creating document:", error);
-//         res.status(500).json({ message: error.message || "Server error while creating document" });
-//     }
-// };
 
 export const createDocument = async (req, res) => {
     try {
@@ -84,7 +36,7 @@ export const createDocument = async (req, res) => {
 
 export const getUserDocuments = async (req, res) => {
   try {
-    const userId = req.query.user || req.user._id; // if query.user exists, get that user's docs
+    const userId = req.query.user || req.user._id; 
     const documents = await Document.find({ owner: userId });
     res.json(documents);
 
@@ -126,37 +78,6 @@ export const getOwnerPasswords = async (req, res) => {
   }
 };
 
-// export const getAllPasswords = async (req, res) => {
-//   try {
-//     const userId = req.user._id;
-
-//     const docs = await Document.find({ owner: userId }).select(
-//       "title viewPassword editPassword"
-//     );
-
-//     res.json(docs);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
-
-// export const getAllPasswords = async (req, res) => {
-//   try {
-//     const userId = req.user._id;
-//     const docs = await Document.find({ owner: userId });
-
-//     const result = docs.map(doc => ({
-//       _id: doc._id,
-//       title: doc.title,
-//       ...doc.getDecryptedPasswords()
-//     }));
-
-//     res.json(result);
-//   } catch (err) {
-//     res.status(500).json({ message: "Server error" });
-//   }
-// };
-
 export const getAllPasswords = async (req, res) => {
   try {
     const userId = req.user._id;
@@ -171,7 +92,6 @@ export const getAllPasswords = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
 
 export const getDocument = async (req, res) => {
   try {
@@ -196,7 +116,6 @@ export const verifyPassword = async (req, res) => {
 
     if (!doc) return res.status(404).json({ message: "Document not found" });
 
-    // compare plain password with hashed password
     const isMatch = await bcrypt.compare(editPassword, doc.editPassword);
 
     if (isMatch) {
@@ -229,40 +148,6 @@ export const getDocumentForEdit = async (req, res) => {
   }
 };
 
-// export const updateDocument = async (req, res) => {
-//   const { title, content, editPassword } = req.body;
-//   const userId = req.user._id;
-
-//   try {
-//     const document = await Document.findById(req.params.id);
-//     if (!document) {
-//       return res.status(404).json({ message: 'Document not found' });
-//     }
-
-//     const isOwner = document.owner.equals(userId);
-
-//     // Scenario 1: Owner (no password needed)
-//     if (isOwner) {
-//       document.title = title || document.title;
-//       document.content = content || document.content;
-//       const updatedDocument = await document.save();
-//       return res.json(updatedDocument);
-//     }
-
-//     // Scenario 2: Not owner → must match hashed password
-//     const isMatch = await bcrypt.compare(editPassword, document.editPassword); // ✅ FIXED
-//     if (isMatch) {
-//       document.title = title || document.title;
-//       document.content = content || document.content;
-//       const updatedDocument = await document.save();
-//       return res.json(updatedDocument);
-//     }
-
-//     return res.status(401).json({ message: 'Not authorized or incorrect editor password' });
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
 
 export const updateDocument = async (req, res) => {
   const { title, content, editPassword, newEditPassword, newViewPassword } = req.body;
@@ -313,22 +198,6 @@ export const updateDocument = async (req, res) => {
 };
 
 
-// export const deleteDocument = async (req, res) => {
-
-//     try {
-//         const document = await Document.findById(req.params.id);
-//         if (!document) {
-//             return res.status(404).json({ message: 'Document not found' });
-//         }
-//         if (!document.owner.equals(req.user._id)) {
-//             return res.status(401).json({ message: 'Not authorized' });
-//         }
-//         await document.deleteOne();
-//         res.json({ message: 'Document removed' });
-//     } catch (error) {
-//         res.status(500).json({ message: error.message });
-//     }
-// };
 
 export const deleteDocument = async (req, res) => {
   try {

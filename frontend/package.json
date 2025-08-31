@@ -15,12 +15,21 @@
     "autoprefixer": "^10.4.21",
     "axios": "^1.11.0",
     "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "docx": "^9.5.1",
+    "docx-preview": "^0.3.6",
+    "express": "^5.1.0",
+    "mammoth": "^1.10.0",
+    "multer": "^2.0.2",
+    "pdf-parse": "^1.1.1",
+    "pdfjs-dist": "^5.4.149",
     "postcss": "^8.5.6",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.8.2",
     "react-toastify": "^11.0.5",
-    "tailwindcss": "^4.1.12"
+    "tailwindcss": "^4.1.12",
+    "textract": "^2.5.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
