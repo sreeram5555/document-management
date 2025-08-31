@@ -1,6 +1,6 @@
 # Collaborative Secure File Editor
 
-A web application that allows users to **create, share, and securely manage files online** with password protection. Owners can set separate **edit** and **view** passwords, and users receive notifications whenever someone interacts with their files.
+A web application that allows users to **create, share, and securely manage files online** with password protection. Owners can set separate **edit** and **view** passwords, and users receive notifications whenever someone interacts with their files. Users can also **upload files from their local system** for editing and viewing.
 
 ---
 
@@ -8,6 +8,7 @@ A web application that allows users to **create, share, and securely manage file
 
 - User authentication (signup/login)  
 - Create files **directly on the website** with **edit** and **view** passwords  
+- **Upload files from your local system** (txt, PDF, Word, JSON, CSV, HTML)  
 - Passwords are securely stored using **bcrypt hashing**  
 - Non-owners require the correct password to view or edit files  
 - File owners receive notifications when their files are viewed or edited  
@@ -28,5 +29,5 @@ A web application that allows users to **create, share, and securely manage file
 
 1. Clone the repository:  
    ```bash
-    git clone https://github.com/sreeram5555/document-management.git
-    cd document-management
+   git clone https://github.com/sreeram5555/document-management.git
+   cd document-management
